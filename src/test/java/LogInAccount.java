@@ -17,10 +17,12 @@ public class LogInAccount {
         driver.get(url);
     }
 
-    @AfterMethod
+    /*@AfterMethod
     public void closeChrome() {
         driver.quit();
-    }
+    }*/
+
+
 
     @Test
     public void testOpenAuthenticationPage() {
@@ -36,11 +38,7 @@ public class LogInAccount {
 
         // Act
         HomePage siteHP = new HomePage(driver);
-        siteHP
-                .openAuthentication()
-                .enterEmail(email)
-                .enterPassword(pwd)
-                .openMyAccountPage();
+        siteHP.openAuthentication().logIn(email,pwd);
 
         By listAccountButtonSelector = By.cssSelector("#center_column li");
         var listAccountButton = driver.findElements(listAccountButtonSelector);
@@ -58,10 +56,7 @@ public class LogInAccount {
         // Act
         HomePage siteHP = new HomePage(driver);
         siteHP
-                .openAuthentication()
-                .enterEmail(email)
-                .enterPassword(falsePwd)
-                .openMyAccountPage();
+                .openAuthentication().logIn(email,falsePwd);
 
         By errorMsgSelector = By.cssSelector(".alert li");
 
