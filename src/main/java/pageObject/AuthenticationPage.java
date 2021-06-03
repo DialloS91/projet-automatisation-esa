@@ -19,19 +19,16 @@ public class AuthenticationPage extends Safe {
 
     public MyAccountPage logIn(String email, String pwd) {
         System.out.println("LogIn with : " + email + " password: " + pwd);
-        var emailWE = driver.findElement(emailBoxSelector);
-        safeSendKeys(driver, emailWE, email);
-        var pwdWE = driver.findElement(pwdBoxSelector);
-        safeSendKeys(driver, pwdWE, pwd);
-        safeClick(driver, driver.findElement(signinButton));
+        safeSendKeys(driver, emailBoxSelector, email);
+        safeSendKeys(driver, pwdBoxSelector, pwd);
+        safeClick(driver, signinButton);
         return new MyAccountPage(driver);
     }
 
     public CreateAccountPage createAccount(String newEmail) {
         System.out.println("Create my account with : " + newEmail);
-        var emailWE = driver.findElement(enterNewEmail);
-        safeSendKeys(driver, emailWE, newEmail);
-        safeClick(driver, driver.findElement(CreateAccountButtonSelector));
+        safeSendKeys(driver, enterNewEmail, newEmail);
+        safeClick(driver, CreateAccountButtonSelector);
         return new CreateAccountPage(driver);
     }
 }

@@ -111,25 +111,4 @@ public class LogInAccount {
         Assert.assertTrue(driver.findElement(name).getText().equals(ExpectedResult), "Le nom affiche [" + name + "] n'est pas celui de l'utilisateur' [" + ExpectedResult + "].");
 
     }
-
-    @Test
-    public void SearchArticleTest(){
-
-        String article = "Dress";
-        By products = By.cssSelector("[itemprop='name']");
-
-        // Act
-        HomePage siteHP = new HomePage(driver);
-        siteHP.searchBarArticle(article);
-
-
-
-        // Assert
-        String articleText1 = driver.findElements(products).get(1).getText();
-        Assert.assertTrue(articleText1.contains(article));
-        String articleText2 = driver.findElements(products).get(2).getText();
-        Assert.assertTrue(articleText2.contains(article));
-        String articleText3 = driver.findElements(products).get(3).getText();
-        Assert.assertTrue(articleText3.contains(article));
-    }
 }

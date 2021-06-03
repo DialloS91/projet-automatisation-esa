@@ -17,14 +17,14 @@ public class Header extends Safe {
 
     public AuthenticationPage openAuthentication() {
         System.out.println("Open Authentication page");
-        safeClick(driver, driver.findElement(signinButtonSelector));
+        safeClick(driver, signinButtonSelector);
         return new AuthenticationPage(driver);
     }
 
     public SearchPage searchBarArticle(String article) {
         System.out.println("Search an Article and submit");
         driver.findElement(searchBar).sendKeys(article);
-        safeClick(driver, driver.findElement(searchSubmit));
+        safeClick(driver, searchSubmit);
         return new SearchPage(driver);
     }
 }
