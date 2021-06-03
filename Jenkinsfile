@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Execution rights') {
             steps {
-                bat "gradlew.bat clean test --tests ${params.testClass}"
+                bat "gradlew.bat clean test
             }
         }
         stage('Test') {
