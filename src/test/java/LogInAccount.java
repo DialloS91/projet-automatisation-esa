@@ -72,7 +72,7 @@ public class LogInAccount {
     public void testCreateAccount(){
 
         // Arrange
-        String newEmail = "Elhad@domain.com";
+        String newEmail = "Elhadj@dggmaill.com";
         String firstName = "Elhadj";
         String lastName = "Tiam";
         String password = "password";
@@ -95,6 +95,8 @@ public class LogInAccount {
 
         HomePage siteHP = new HomePage(driver);
 
+        String ExpectedResult = "Elhadj Tiam";
+
 
         // Act
 
@@ -105,11 +107,9 @@ public class LogInAccount {
 
 
 
-
-
-
-
-
         // Assert
+        By name = By.cssSelector("[title='View my customer account']");
+        Assert.assertTrue(driver.findElement(name).getText().equals(ExpectedResult), "Le nom affiche [" + name + "] n'est pas celui de l'utilisateur' [" + ExpectedResult + "].");
+
     }
 }
