@@ -13,6 +13,7 @@ public class MyAccountPage {
     }
 
     public MyAddressPage openAddressPage() {
+        System.out.println("Open Address page");
         driver.findElement(addressButtonSelector).click();
         return new MyAddressPage(driver);
     }

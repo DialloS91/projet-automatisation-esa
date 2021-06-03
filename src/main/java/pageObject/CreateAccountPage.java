@@ -41,6 +41,7 @@ public class CreateAccountPage {
 
 
     public CreateAccountPage selectGender() {
+        System.out.println("Selecting gender");
         WebDriverWait wait = new WebDriverWait(driver, 5);
         wait.until(ExpectedConditions.elementToBeClickable(genderMr));
         driver.findElement(genderMr).click();
@@ -68,102 +69,102 @@ public class CreateAccountPage {
     }
 
 
-    public CreateAccountPage selectMobilePhone(String mobilePhone) {
+    public CreateAccountPage enterMobilePhone(String mobilePhone) {
         System.out.println("entering mobile Phone number");
         driver.findElement(enterMobilePhone).sendKeys(mobilePhone);
         return this;
     }
 
 
-    public CreateAccountPage selectHomePhone(String homePhone) {
+    public CreateAccountPage enterHomePhone(String homePhone) {
         System.out.println("entering Home Phone number");
         driver.findElement(enterHomePhone).sendKeys(homePhone);
         return this;
     }
 
-    public CreateAccountPage selectOtherInfo(String otherInfo) {
+    public CreateAccountPage enterOtherInfo(String otherInfo) {
         System.out.println("entering additional informations");
         driver.findElement(enterOtherInfo).sendKeys(otherInfo);
         return this;
     }
 
 
-    public CreateAccountPage selectCountry(String country) {
+    public CreateAccountPage enterCountry(String country) {
         System.out.println("entering Country name");
         driver.findElement(enterCountry).sendKeys(country);
         return this;
     }
 
 
-    public CreateAccountPage selectPostCode(String postCode) {
+    public CreateAccountPage enterPostCode(String postCode) {
         System.out.println("entering post code");
         driver.findElement(enterPostCode).sendKeys(postCode);
         return this;
     }
 
 
-    public CreateAccountPage selectCity(String city) {
+    public CreateAccountPage enterCity(String city) {
         System.out.println("entering City");
         driver.findElement(enterCity).sendKeys(city);
         return this;
     }
 
 
-    public CreateAccountPage selectState(String state) {
+    public CreateAccountPage enterState(String state) {
         System.out.println("entering State");
         driver.findElement(enterState).sendKeys(state);
         return this;
     }
 
 
-    public CreateAccountPage selectAdress2(String adress2) {
+    public CreateAccountPage enterAdress2(String adress2) {
         System.out.println("entering Adress 2");
         driver.findElement(enterAdress2).sendKeys(adress2);
         return this;
     }
 
 
-    public CreateAccountPage selectAdress(String adress) {
+    public CreateAccountPage enterAdress(String adress) {
         System.out.println("entering Adress");
         driver.findElement(enterAdress).sendKeys(adress);
         return this;
     }
 
-    public CreateAccountPage selectCompany(String company) {
+    public CreateAccountPage enterCompany(String company) {
         System.out.println("entering Company");
         driver.findElement(enterCompany).sendKeys(company);
         return this;
     }
 
-    public CreateAccountPage selectAdressLastName(String AdressLastName) {
+    public CreateAccountPage enterAdressLastName(String AdressLastName) {
         System.out.println("entering Adresse Last Name");
         driver.findElement(enterAdressLastName).sendKeys(AdressLastName);
         return this;
     }
 
-    public CreateAccountPage selectAdressFirstNAme(String AdressFirstName) {
+    public CreateAccountPage enterAdressFirstNAme(String AdressFirstName) {
         System.out.println("entering Adresse First Name");
         driver.findElement(enterAdressFirstName).sendKeys(AdressFirstName);
         return this;
     }
 
 
-    public CreateAccountPage selectDay(String dayBirth) {
-        System.out.println("selecting Day");
+    public CreateAccountPage enterDay(String dayBirth) {
+        System.out.println("entering Day");
         Select dayDropDown = new Select(driver.findElement(selectDayBirth));
         dayDropDown.selectByValue(dayBirth);
         return this;
     }
 
 
-    public CreateAccountPage selectMonth(String monthBirth) {
-        System.out.println("Selecting Month");
+    public CreateAccountPage enterMonth(String monthBirth) {
+        System.out.println("entering Month");
         Select monthDropDown = new Select(driver.findElement(selectMonthBirth));
         monthDropDown.selectByValue(monthBirth);
         return this;
     }
 
-    public CreateAccountPage selectFirstName(String firstName) {
+    public CreateAccountPage enterFirstName(String firstName) {
         System.out.println("entering First Name");
         WebDriverWait wait = new WebDriverWait(driver, 2);
         wait.until(ExpectedConditions.elementToBeClickable(enterFirstName));
@@ -173,52 +174,66 @@ public class CreateAccountPage {
         return this;
     }
 
-    public CreateAccountPage selectLastName(String lastName) {
+    public CreateAccountPage enterLastName(String lastName) {
         System.out.println("entering Last Name");
         driver.findElement(enterLastName).sendKeys(lastName);
         return this;
     }
 
-    public CreateAccountPage selectPassword(String password) {
+    public CreateAccountPage enterPassword(String password) {
         System.out.println("entering Password");
         driver.findElement(enterPassword).sendKeys(password);
         return this;
     }
 
-    public CreateAccountPage selectYear(String year) {
+    public CreateAccountPage enterYear(String year) {
 
-        System.out.println("selecting year");
+        System.out.println("entering year");
         Select yearDropDown = new Select(driver.findElement(selectYearBirth));
         yearDropDown.selectByValue(year);
         return this;
     }
 
 
-    public CreateAccountPage EnterPersonalInformation(String mobilePhone, String homePhone, String otherInfo, String country, String postCode, String city, String state, String adress2, String adress, String company, String AdressFirstName, String AdressLastName, String firstName, String lastName, String password, String dayBirth, String monthBirth, String year) {
+    public CreateAccountPage EnterPersonalInformation(String mobilePhone,
+                                                      String homePhone,
+                                                      String otherInfo,
+                                                      String country,
+                                                      String postCode,
+                                                      String city,
+                                                      String state,
+                                                      String adress2,
+                                                      String adress,
+                                                      String company,
+                                                      String AdressFirstName,
+                                                      String AdressLastName,
+                                                      String firstName,
+                                                      String lastName,
+                                                      String password, String dayBirth, String monthBirth, String year) {
 
 
 
         selectGender();
-        selectFirstName(firstName);
-        selectLastName(lastName);
-        selectPassword(password);
-        selectYear(year);
-        selectDay(dayBirth);
-        selectMonth(monthBirth);
+        enterFirstName(firstName);
+        enterLastName(lastName);
+        enterPassword(password);
+        enterYear(year);
+        enterDay(dayBirth);
+        enterMonth(monthBirth);
         selectOffers();
         selectNewsletter();
-        selectAdressFirstNAme(AdressFirstName);
-        selectAdressLastName(AdressLastName);
-        selectCompany(company);
-        selectAdress(adress);
-        selectAdress2(adress2);
-        selectState(state);
-        selectCity(city);
-        selectPostCode(postCode);
-        selectCountry(country);
-        selectOtherInfo(otherInfo);
-        selectHomePhone(homePhone);
-        selectMobilePhone(mobilePhone);
+        enterAdressFirstNAme(AdressFirstName);
+        enterAdressLastName(AdressLastName);
+        enterCompany(company);
+        enterAdress(adress);
+        enterAdress2(adress2);
+        enterState(state);
+        enterCity(city);
+        enterPostCode(postCode);
+        enterCountry(country);
+        enterOtherInfo(otherInfo);
+        enterHomePhone(homePhone);
+        enterMobilePhone(mobilePhone);
         return this;
     }
 

@@ -2,7 +2,6 @@ package pageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 public class AuthenticationPage {
     WebDriver driver;
@@ -18,6 +17,7 @@ public class AuthenticationPage {
     }
 
     public MyAccountPage logIn(String email, String pwd) {
+        System.out.println("LogIn with : " + email + " password: " + pwd);
         driver.findElement(emailBoxSelector).sendKeys(email);
         driver.findElement(pwdBoxSelector).sendKeys(pwd);
         driver.findElement(signinButton).click();
@@ -25,7 +25,7 @@ public class AuthenticationPage {
     }
 
     public CreateAccountPage createAccount(String newEmail) {
-        System.out.println("Open Create my account Page");
+        System.out.println("Create my account with : " + newEmail);
         driver.findElement(enterNewEmail).sendKeys(newEmail);
         driver.findElement(CreateAccountButtonSelector).click();
         return new CreateAccountPage(driver);
