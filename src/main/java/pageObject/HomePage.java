@@ -8,6 +8,7 @@ public class HomePage {
     WebDriver driver;
     By signinButtonSelector = By.cssSelector(".header_user_info");
 
+
     public HomePage(WebDriver driver) {
         this.driver = driver;
     }
@@ -17,4 +18,6 @@ public class HomePage {
         driver.findElement(signinButtonSelector).click();
         return new AuthenticationPage(driver);
     }
+
+
 }
