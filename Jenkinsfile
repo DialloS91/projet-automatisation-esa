@@ -2,14 +2,9 @@ pipeline {
     agent any
 
     stages {
-        stage('Execution rights') {
-            steps {
-                bat "gradlew.bat clean test
-            }
-        }
         stage('Test') {
             steps {
-                sh './gradlew clean test'
+                bat "gradlew.bat clean test --tests ${params.testClass}"
             }
         }
     }
