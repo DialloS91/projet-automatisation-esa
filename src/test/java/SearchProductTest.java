@@ -26,8 +26,7 @@ public class SearchProductTest extends Safe {
 
     @Test
     public void SearchArticleTest(){
-
-
+        //TODO Refactor the code
         String article = "Dress";
         By products = By.cssSelector("[itemprop='name']");
 
@@ -48,6 +47,8 @@ public class SearchProductTest extends Safe {
 
     @Test
     public void searchArticleAutocomplete() {
+        //TODO Refactor this test
+
         // Arrange
         String incomplete = "dre";
 
@@ -56,11 +57,13 @@ public class SearchProductTest extends Safe {
         By firstChoiceSelector = By.cssSelector(".ac_results ul li:first-child");
         By searchSelector = By.id("search_query_top");
         By titleProductSelector = By.cssSelector("#product [itemprop=\"name\"]");
+        //TODO implement the method "partialSearch" inside Header class
         safeSendKeys(driver, searchSelector, incomplete);
         String expectedTitleProduct = safeGetText(driver, firstChoiceSelector).split("> ")[1];
 
         // Assert
         Assert.assertTrue(driver.findElement(autoBlockSelector).isDisplayed());
+        //TODO implement getTitleProduct inside a ProductPage class
         safeClick(driver, firstChoiceSelector);
         Assert.assertEquals(safeGetText(driver, titleProductSelector), expectedTitleProduct);
     }
