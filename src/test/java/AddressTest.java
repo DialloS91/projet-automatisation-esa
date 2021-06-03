@@ -7,6 +7,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pageObject.HomePage;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class AddressTest {
     WebDriver driver;
     String url = "http://automationpractice.com";
@@ -28,13 +30,14 @@ public class AddressTest {
     @Test
     public void createAddress() {
         // Arrange
+        int randomNum = ThreadLocalRandom.current().nextInt(1, 50 + 1);
         String faddress = "road company";
         String city = "paris";
         String state = "Texas";
         String zip = "75000";
         String country = "United States";
         String phone = "06505050";
-        String alias = "Add3";
+        String alias = "ADD3"+Integer.toString(randomNum);
 
         // Act
         var hp = new HomePage(driver);
@@ -52,8 +55,7 @@ public class AddressTest {
 
         By aliasSelector = By.cssSelector(".bloc_adresses div h3");
         var addressList = driver.findElements(aliasSelector);
-        var index = addressList.size() <= 0 ? addressList.size() - 1 : 0;
-        var expectedAlias = addressList.get(index).getText();
+        var expectedAlias = addressList.get(addressList.size()-1).getText();
 
 
         // Assert
