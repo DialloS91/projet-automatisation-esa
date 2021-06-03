@@ -1,14 +1,13 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pageObject.CreateAccountPage;
 import pageObject.HomePage;
+
+import java.util.concurrent.ThreadLocalRandom;
 
 public class LogInAccount {
     WebDriver driver;
@@ -20,10 +19,10 @@ public class LogInAccount {
         driver.get(url);
     }
 
-    /*@AfterMethod
+    @AfterMethod
     public void closeChrome() {
         driver.quit();
-    }*/
+    }
 
 
 
@@ -56,11 +55,10 @@ public class LogInAccount {
         String email = "andy@domain.com";
         String falsePwd = "123456";
         String expectedMsg = "Authentication failed.";
+
         // Act
         HomePage siteHP = new HomePage(driver);
-        siteHP
-                .openAuthentication().logIn(email,falsePwd);
-
+        siteHP.openAuthentication().logIn(email,falsePwd);
         By errorMsgSelector = By.cssSelector(".alert li");
 
         // Assert
@@ -70,10 +68,10 @@ public class LogInAccount {
 
     @Test
     public void testCreateAccount(){
-        
 
         // Arrange
-        String newEmail = "Elhadj@dggmaill.com";
+        int randomNum = ThreadLocalRandom.current().nextInt(1, 5000 + 1);
+        String newEmail = randomNum + "Elhadj@dggmaill.com";
         String firstName = "Elhadj";
         String lastName = "Tiam";
         String password = "password";
