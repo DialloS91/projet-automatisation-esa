@@ -1,2 +1,4 @@
-package shared;public class header {
+package shared;
+
+public class Header {
 }

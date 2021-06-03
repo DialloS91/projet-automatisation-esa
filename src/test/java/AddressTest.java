@@ -52,7 +52,8 @@ public class AddressTest {
 
         By aliasSelector = By.cssSelector(".bloc_adresses div h3");
         var addressList = driver.findElements(aliasSelector);
-        var expectedAlias = addressList.get(addressList.size() - 1).getText();
+        var index = addressList.size() <= 0 ? addressList.size() - 1 : 0;
+        var expectedAlias = addressList.get(index).getText();
 
 
         // Assert

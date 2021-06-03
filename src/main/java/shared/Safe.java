@@ -1,2 +1,4 @@
-package shared;public class Safe {
+package shared;
+
+public class Safe {
 }
