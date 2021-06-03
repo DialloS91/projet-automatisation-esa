@@ -26,6 +26,4 @@ public class HomePage {
         driver.findElement(searchSubmit).click();
         return new SearchPage(driver);
     }
-
-
 }
