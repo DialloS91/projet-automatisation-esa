@@ -1,16 +1,15 @@
 package pageObject;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
+import shared.Header;
 
-import java.util.ArrayList;
-
-public class SearchPage {
+public class SearchPage extends Header {
 
     WebDriver driver;
 
-    public SearchPage(WebDriver driver){this.driver = driver;}
+    public SearchPage(WebDriver driver){
+        super(driver);
+        this.driver = driver;
+    }
 
 }

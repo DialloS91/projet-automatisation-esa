@@ -6,6 +6,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pageObject.HomePage;
+import shared.Retry;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -27,7 +28,7 @@ public class AddressTest {
         driver.quit();
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void createAddress() {
         // Arrange
         int randomNum = ThreadLocalRandom.current().nextInt(1, 5000 + 1);
@@ -65,7 +66,7 @@ public class AddressTest {
                 + alias);
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void updateAddress() {
         // Arrange
         String company = "super company";
@@ -96,7 +97,7 @@ public class AddressTest {
         Assert.assertEquals(sndAddress, updatedSndAddress, "Wrong 2nd Address update");
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void sameAddress() {
         // Arrange
         String email = "same@domain.com";

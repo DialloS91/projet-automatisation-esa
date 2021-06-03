@@ -2,8 +2,9 @@ package pageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import shared.Safe;
 
-public class AuthenticationPage {
+public class AuthenticationPage extends Safe {
     WebDriver driver;
 
     By emailBoxSelector = By.id("email");
@@ -18,16 +19,19 @@ public class AuthenticationPage {
 
     public MyAccountPage logIn(String email, String pwd) {
         System.out.println("LogIn with : " + email + " password: " + pwd);
-        driver.findElement(emailBoxSelector).sendKeys(email);
-        driver.findElement(pwdBoxSelector).sendKeys(pwd);
-        driver.findElement(signinButton).click();
+        var emailWE = driver.findElement(emailBoxSelector);
+        safeSendKeys(driver, emailWE, email);
+        var pwdWE = driver.findElement(pwdBoxSelector);
+        safeSendKeys(driver, pwdWE, pwd);
+        safeClick(driver, driver.findElement(signinButton));
         return new MyAccountPage(driver);
     }
 
     public CreateAccountPage createAccount(String newEmail) {
         System.out.println("Create my account with : " + newEmail);
-        driver.findElement(enterNewEmail).sendKeys(newEmail);
-        driver.findElement(CreateAccountButtonSelector).click();
+        var emailWE = driver.findElement(enterNewEmail);
+        safeSendKeys(driver, emailWE, newEmail);
+        safeClick(driver, driver.findElement(CreateAccountButtonSelector));
         return new CreateAccountPage(driver);
     }
 }

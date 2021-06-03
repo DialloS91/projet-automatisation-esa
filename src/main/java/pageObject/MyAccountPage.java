@@ -2,13 +2,15 @@ package pageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import shared.Header;
 
-public class MyAccountPage {
+public class MyAccountPage extends Header {
     WebDriver driver;
 
     By addressButtonSelector = By.cssSelector("[title=\"Addresses\"]");
 
     public MyAccountPage(WebDriver driver) {
+        super(driver);
         this.driver = driver;
     }
 
