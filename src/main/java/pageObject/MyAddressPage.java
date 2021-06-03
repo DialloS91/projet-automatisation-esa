@@ -2,6 +2,8 @@ package pageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class MyAddressPage {
     WebDriver driver;
@@ -32,12 +34,16 @@ public class MyAddressPage {
 
     public String getAddress(int index) {
         var addresses = driver.findElements(AddressSelector).get(index);
+        String result = "";
+
         var nameList = addresses.findElements(nameAddressSelector);
         var name = nameList.get(0).getText()+" "+nameList.get(1).getText();
         var fstadd = addresses.findElement(firstAddressSelector).getText();
-        var mobile = addresses.findElement(mobileAddressSelector).getText();
+
+        WebDriverWait wait = new WebDriverWait(driver, 5);
+        var mobile = wait.until(ExpectedConditions.elementToBeClickable(mobileAddressSelector)).getText();
+
         System.out.println("Get text address: " + "name: " + name + " address: " + fstadd + " mobile: " + mobile);
-        String result = "";
 
         result = result+name+fstadd+mobile;
 

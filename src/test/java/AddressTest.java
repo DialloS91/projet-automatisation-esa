@@ -30,7 +30,7 @@ public class AddressTest {
     @Test
     public void createAddress() {
         // Arrange
-        int randomNum = ThreadLocalRandom.current().nextInt(1, 50 + 1);
+        int randomNum = ThreadLocalRandom.current().nextInt(1, 5000 + 1);
         String faddress = "road company";
         String city = "paris";
         String state = "Texas";
