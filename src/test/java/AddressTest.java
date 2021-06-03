@@ -22,7 +22,7 @@ public class AddressTest {
 
     @AfterMethod
     public void closeChrome() {
-        //driver.quit();
+        driver.quit();
     }
 
     @Test
@@ -91,5 +91,29 @@ public class AddressTest {
         Assert.assertEquals(company, updatedCompany, "Wrong company update");
         Assert.assertEquals(mobile, updatedMobile, "Wrong mobile update");
         Assert.assertEquals(sndAddress, updatedSndAddress, "Wrong 2nd Address update");
+    }
+
+    @Test
+    public void sameAddress() {
+        // Arrange
+        String email = "same@domain.com";
+        String pwd = "tasta";
+        String name = "john smith";
+        String address = "road issy";
+        String mobile = "06060606";
+        String alias = "ADDRESS";
+        String expectedCredential = name+address+mobile;
+
+        // Act
+        var hp = new HomePage(driver);
+        String add = hp.openAuthentication()
+                .logIn(email, pwd)
+                .openAddressPage().getAddress(0);
+
+        // Assert
+        Assert.assertEquals(expectedCredential, add, "Not the same address: expected = "
+                + expectedCredential
+                + " got = "
+                + add);
     }
 }
