@@ -6,6 +6,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pageObject.HomePage;
+import shared.Retry;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -25,13 +26,12 @@ public class LogInAccount {
     }
 
 
-
     @Test
     public void testOpenAuthenticationPage() {
         HomePage siteHP = new HomePage(driver);
         siteHP.openAuthentication();
     }
-
+//TODO Refactor the tests (drivers and selector should not be here)
     @Test
     public void testLogIn() {
         // Arrange
@@ -40,7 +40,7 @@ public class LogInAccount {
 
         // Act
         HomePage siteHP = new HomePage(driver);
-        siteHP.openAuthentication().logIn(email,pwd);
+        siteHP.openAuthentication().logIn(email, pwd);
 
         By listAccountButtonSelector = By.cssSelector("#center_column li");
         var listAccountButton = driver.findElements(listAccountButtonSelector);
@@ -49,7 +49,7 @@ public class LogInAccount {
         listAccountButton.forEach(button -> Assert.assertTrue(button.isDisplayed()));
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testLogInFalsePwd() {
         // Arrange
         String email = "andy@domain.com";
@@ -58,16 +58,17 @@ public class LogInAccount {
 
         // Act
         HomePage siteHP = new HomePage(driver);
-        siteHP.openAuthentication().logIn(email,falsePwd);
-        By errorMsgSelector = By.cssSelector(".alert li");
+        String errorMsg = siteHP
+                .openAuthentication()
+                .logIn(email, falsePwd)
+                .getErrorMsg();
 
         // Assert
-        Assert.assertTrue(driver.findElement(errorMsgSelector)
-                .getText().equals(expectedMsg));
+        Assert.assertEquals(errorMsg, expectedMsg);
     }
 
     @Test
-    public void testCreateAccount(){
+    public void testCreateAccount() {
 
         // Arrange
         int randomNum = ThreadLocalRandom.current().nextInt(1, 5000 + 1);
@@ -101,9 +102,8 @@ public class LogInAccount {
 
 
         siteHP.openAuthentication().
-                createAccount(newEmail).EnterPersonalInformation(mobilePhone,homePhone,otherInfo,country, postCode, city, state,adress2,adress,company,AdressFirstName,AdressLastName, firstName, lastName, password,dayBirth,monthBirth,year)
+                createAccount(newEmail).EnterPersonalInformation(mobilePhone, homePhone, otherInfo, country, postCode, city, state, adress2, adress, company, AdressFirstName, AdressLastName, firstName, lastName, password, dayBirth, monthBirth, year)
                 .Submit();
-
 
 
         // Assert

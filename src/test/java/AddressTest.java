@@ -28,6 +28,8 @@ public class AddressTest {
         driver.quit();
     }
 
+    //TODO Refactor the tests (drivers and selector should not be here)
+    //TODO
     @Test(retryAnalyzer = Retry.class)
     public void createAddress() {
         // Arrange
@@ -65,7 +67,7 @@ public class AddressTest {
                 + " and expected = "
                 + alias);
     }
-
+//TODO
     @Test(retryAnalyzer = Retry.class)
     public void updateAddress() {
         // Arrange

@@ -8,6 +8,7 @@ public class MyAccountPage extends Header {
     WebDriver driver;
 
     By addressButtonSelector = By.cssSelector("[title=\"Addresses\"]");
+    By errorMsgSelector = By.cssSelector(".alert li");
 
     public MyAccountPage(WebDriver driver) {
         super(driver);
@@ -19,6 +20,11 @@ public class MyAccountPage extends Header {
         driver.findElement(addressButtonSelector).click();
         return new MyAddressPage(driver);
     }
+
+    public String getErrorMsg() {
+        return driver.findElement(errorMsgSelector).getText();
+    }
+
 }
 
 

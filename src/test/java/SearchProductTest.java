@@ -24,9 +24,10 @@ public class SearchProductTest extends Safe {
         driver.quit();
     }
 
+    //TODO Refactor the tests (drivers and selector should not be here)
+    //TODO
     @Test
     public void SearchArticleTest(){
-        //TODO Refactor the code
         String article = "Dress";
         By products = By.cssSelector("[itemprop='name']");
 
@@ -45,10 +46,9 @@ public class SearchProductTest extends Safe {
         Assert.assertTrue(articleText3.contains(article));
     }
 
+    //TODO
     @Test
     public void searchArticleAutocomplete() {
-        //TODO Refactor this test
-
         // Arrange
         String incomplete = "dre";
 
@@ -68,6 +68,7 @@ public class SearchProductTest extends Safe {
         Assert.assertEquals(safeGetText(driver, titleProductSelector), expectedTitleProduct);
     }
 
+    //TODO
     @Test
     public void searchBarInsideHeader() {
         // Arrange
