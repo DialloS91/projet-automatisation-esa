@@ -31,7 +31,8 @@ public class LogInAccount {
         HomePage siteHP = new HomePage(driver);
         siteHP.openAuthentication();
     }
-//TODO Refactor the tests (drivers and selector should not be here)
+
+    //TODO Refactor the tests (drivers and selector should not be here)
     @Test
     public void testLogIn() {
         // Arrange
@@ -40,10 +41,10 @@ public class LogInAccount {
 
         // Act
         HomePage siteHP = new HomePage(driver);
-        siteHP.openAuthentication().logIn(email, pwd);
-
-        By listAccountButtonSelector = By.cssSelector("#center_column li");
-        var listAccountButton = driver.findElements(listAccountButtonSelector);
+        var listAccountButton =
+                siteHP.openAuthentication()
+                        .logIn(email, pwd)
+                        .getButtonList();
 
         // Assert
         listAccountButton.forEach(button -> Assert.assertTrue(button.isDisplayed()));
@@ -99,16 +100,19 @@ public class LogInAccount {
 
 
         // Act
-
-
-        siteHP.openAuthentication().
-                createAccount(newEmail).EnterPersonalInformation(mobilePhone, homePhone, otherInfo, country, postCode, city, state, adress2, adress, company, AdressFirstName, AdressLastName, firstName, lastName, password, dayBirth, monthBirth, year)
-                .Submit();
+        var name = siteHP.openAuthentication()
+                .createAccount(newEmail)
+                .EnterPersonalInformation(mobilePhone, homePhone, otherInfo,
+                        country, postCode, city,
+                        state, adress2, adress,
+                        company, AdressFirstName, AdressLastName,
+                        firstName, lastName, password,
+                        dayBirth, monthBirth, year)
+                .Submit().getName();
 
 
         // Assert
-        By name = By.cssSelector("[title='View my customer account']");
-        Assert.assertTrue(driver.findElement(name).getText().equals(ExpectedResult), "Le nom affiche [" + name + "] n'est pas celui de l'utilisateur' [" + ExpectedResult + "].");
-
+        By nameSelector = By.cssSelector("[title='View my customer account']");
+        Assert.assertEquals(name, ExpectedResult, "Wrong name for the account");
     }
 }

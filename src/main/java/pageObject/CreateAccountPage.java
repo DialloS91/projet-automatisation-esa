@@ -237,10 +237,10 @@ public class CreateAccountPage {
         return this;
     }
 
-    public CreateAccountPage Submit() {
+    public MyAccountPage Submit() {
         System.out.println("Submit");
         driver.findElement(submitbutton).click();
-        return this;
+        return new MyAccountPage(driver);
     }
 
 
