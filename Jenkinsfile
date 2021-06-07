@@ -1,13 +1,14 @@
 pipeline {
     agent any
     parameters {
-        string(name: 'testClass', defaultValue: 'None', description: 'Which Script should I launch')   
+        string(name: 'option', defaultValue: '', description: 'option for gradle')  
+        string(name: 'testClass', defaultValue: '', description: 'Which Script should I launch')   
     }
 
     stages {
         stage('Test') {
             steps {
-                bat "gradlew.bat clean test --tests ${params.testClass}"
+                bat "gradlew.bat clean test ${params.option}"
             }
         }
     }
