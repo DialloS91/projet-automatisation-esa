@@ -54,13 +54,15 @@ public class Header extends Safe {
     }
 
     public String getSuggestionTitle(int index) {
-        System.out.println("suggestions = " + suggestions);
+
 
         WebDriverWait wait = new WebDriverWait(driver, 5);
         wait.until(ExpectedConditions.elementToBeClickable(suggestions.get(index)));
         var selection = suggestions.get(index);
         //TODO weak
-        return selection.getText().split("> ")[1];
+        String title = selection.getText().split("> ")[1];
+        System.out.println("Getting suggestion title = " + title);
+        return title;
     }
 
     public boolean isSuggestDropDownDisplayed() {
@@ -68,6 +70,7 @@ public class Header extends Safe {
     }
 
     public ProductPage openSuggestion(int index) {
+        System.out.println("opening suggestion");
         var selection = suggestions.get(index);
         selection.click();
         return new ProductPage(driver);

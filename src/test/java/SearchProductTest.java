@@ -56,12 +56,13 @@ public class SearchProductTest extends Safe {
         Header header = new Header(driver);
         var suggest = header.partialSearch(dress);
         String expectedTitleProduct = suggest.getSuggestionTitle(firstChoice);
-        String productTitle = suggest
-                .openSuggestion(firstChoice)
-                .getProductTitle();
 
         // Assert
         Assert.assertTrue(suggest.isSuggestDropDownDisplayed());
+
+        String productTitle = suggest
+                .openSuggestion(firstChoice)
+                .getProductTitle();
         Assert.assertEquals(productTitle, expectedTitleProduct);
     }
 
