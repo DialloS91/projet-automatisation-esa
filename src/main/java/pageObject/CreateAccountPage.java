@@ -42,7 +42,7 @@ public class CreateAccountPage {
 
     public CreateAccountPage selectGender() {
         System.out.println("Selecting gender");
-        WebDriverWait wait = new WebDriverWait(driver, 5);
+        WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.elementToBeClickable(genderMr));
         driver.findElement(genderMr).click();
         return this;
@@ -62,7 +62,7 @@ public class CreateAccountPage {
     }
 
 
-    public CreateAccountPage enterAllias(String alias) {
+    public CreateAccountPage enterAlias(String alias) {
         System.out.println("entering alias");
         driver.findElement(enterAllias).sendKeys(alias);
         return this;

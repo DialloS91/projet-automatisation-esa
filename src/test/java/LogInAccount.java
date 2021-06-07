@@ -1,4 +1,3 @@
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
@@ -26,14 +25,14 @@ public class LogInAccount {
     }
 
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testOpenAuthenticationPage() {
         HomePage siteHP = new HomePage(driver);
         siteHP.openAuthentication();
     }
 
     //TODO Refactor the tests (drivers and selector should not be here)
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testLogIn() {
         // Arrange
         String email = "andy@domain.com";
@@ -68,7 +67,7 @@ public class LogInAccount {
         Assert.assertEquals(errorMsg, expectedMsg);
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testCreateAccount() {
 
         // Arrange
@@ -112,7 +111,6 @@ public class LogInAccount {
 
 
         // Assert
-        By nameSelector = By.cssSelector("[title='View my customer account']");
         Assert.assertEquals(name, ExpectedResult, "Wrong name for the account");
     }
 }

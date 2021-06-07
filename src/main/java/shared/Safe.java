@@ -6,7 +6,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Safe {
-    private static final long TIME = 5;
+    private static final long TIME = 10;
 
     public void safeClick(WebDriver driver, By by) {
         WebDriverWait wait = new WebDriverWait(driver, TIME);

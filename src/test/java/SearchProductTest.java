@@ -1,13 +1,15 @@
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pageObject.HomePage;
+import shared.Header;
+import shared.Retry;
 import shared.Safe;
+
+import java.util.ArrayList;
 
 public class SearchProductTest extends Safe {
     WebDriver driver;
@@ -26,57 +28,55 @@ public class SearchProductTest extends Safe {
 
     //TODO Refactor the tests (drivers and selector should not be here)
     //TODO
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void SearchArticleTest(){
+        // Arrange
         String article = "Dress";
-        By products = By.cssSelector("[itemprop='name']");
+        int numberOfProduct = 3;
 
         // Act
         HomePage siteHP = new HomePage(driver);
-        siteHP.searchBarArticle(article);
-
-
+        var searchPage = siteHP.searchBarArticle(article);
+        var titleList = new ArrayList<String>();
+        for (int i = 0; i < numberOfProduct; i++) {
+            titleList.add(searchPage.getProductTitle(i));
+        }
 
         // Assert
-        String articleText1 = driver.findElements(products).get(1).getText();
-        Assert.assertTrue(articleText1.contains(article));
-        String articleText2 = driver.findElements(products).get(2).getText();
-        Assert.assertTrue(articleText2.contains(article));
-        String articleText3 = driver.findElements(products).get(3).getText();
-        Assert.assertTrue(articleText3.contains(article));
+        titleList.forEach(title -> Assert.assertTrue(title.contains(article),
+                "Product title: ["+ title +
+                "] does not contain: [" + article +"]"));
     }
 
     //TODO
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void searchArticleAutocomplete() {
         // Arrange
-        String incomplete = "dre";
+        String dress = "dre";
+        int firstChoice = 0;
 
         // Act
-        By autoBlockSelector = By.cssSelector(".ac_results");
-        By firstChoiceSelector = By.cssSelector(".ac_results ul li:first-child");
-        By searchSelector = By.id("search_query_top");
-        By titleProductSelector = By.cssSelector("#product [itemprop=\"name\"]");
-        //TODO implement the method "partialSearch" inside Header class
-        safeSendKeys(driver, searchSelector, incomplete);
-        String expectedTitleProduct = safeGetText(driver, firstChoiceSelector).split("> ")[1];
+        Header header = new Header(driver);
+        var suggest = header.partialSearch(dress);
+        String expectedTitleProduct = suggest.getSuggestionTitle(firstChoice);
 
         // Assert
-        Assert.assertTrue(driver.findElement(autoBlockSelector).isDisplayed());
-        //TODO implement getTitleProduct inside a ProductPage class
-        safeClick(driver, firstChoiceSelector);
-        Assert.assertEquals(safeGetText(driver, titleProductSelector), expectedTitleProduct);
+        Assert.assertTrue(suggest.isSuggestDropDownDisplayed());
+
+        String productTitle = suggest
+                .openSuggestion(firstChoice)
+                .getProductTitle();
+        Assert.assertEquals(productTitle, expectedTitleProduct);
     }
 
-    //TODO
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void searchBarInsideHeader() {
         // Arrange
 
         // Act
-        WebElement header = driver.findElement(By.tagName("header"));
+        Header header = new Header(driver);
 
         // Assert
-        Assert.assertTrue(header.findElement(By.id("searchbox")).isDisplayed());
+        Assert.assertTrue(header.getSearchBox().isDisplayed());
     }
 }
