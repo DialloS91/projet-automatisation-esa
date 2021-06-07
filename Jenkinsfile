@@ -7,7 +7,18 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                bat "gradlew.bat clean test --tests ${params.testClass}"
+                def userInput = input(
+                            id: 'userInput', message: 'inptu options and class to execute',
+                            parameters: [
+
+                                    string(defaultValue: '--tests',
+                                            description: 'options',
+                                            name: 'Option'),
+                                    string(defaultValue: 'None',
+                                            description: 'test script to execute',
+                                            name: 'testClass'),
+                            ])
+                bat "gradlew.bat clean test ${userInput.Option} ${userInput.testClass}"
             }
         }
     }
