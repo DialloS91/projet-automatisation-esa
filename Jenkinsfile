@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    parameters {
+        string(name: 'testClass', defaultValue: '', description: 'Which Script should I launch')   
+    }
 
     stages {
         stage('Test') {
