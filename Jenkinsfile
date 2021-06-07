@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                bat "gradlew.bat clean test --tests "SearchProductTest.searchArticleAutocomplete""
+                bat "gradlew.bat clean test --tests SearchProductTest.searchArticleAutocomplete"
             }
         }
     }
