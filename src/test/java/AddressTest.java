@@ -1,4 +1,3 @@
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
@@ -28,15 +27,13 @@ public class AddressTest {
         driver.quit();
     }
 
-    //TODO Refactor the tests (drivers and selector should not be here)
-    //TODO
     @Test(retryAnalyzer = Retry.class)
     public void createAddress() {
         // Arrange
         int randomNum = ThreadLocalRandom.current().nextInt(1, 5000 + 1);
         String faddress = "road company";
         String city = "paris";
-        String state = "Texas";
+        String state = "Texas"; // ou String texas = "#thenumber"
         String zip = "75000";
         String country = "United States";
         String phone = "06505050";
@@ -44,7 +41,7 @@ public class AddressTest {
 
         // Act
         var hp = new HomePage(driver);
-        hp.openAuthentication()
+        String expectedAlias = hp.openAuthentication()
                 .logIn(EMAIL, PWD)
                 .openAddressPage()
                 .createAddress()
@@ -54,12 +51,9 @@ public class AddressTest {
                 .selectCountry(country)
                 .enterPostCode(zip)
                 .enterMobilePhone(phone)
-                .enterAddressAlias(alias).save();
-
-        By aliasSelector = By.cssSelector(".bloc_adresses div h3");
-        var addressList = driver.findElements(aliasSelector);
-        var expectedAlias = addressList.get(addressList.size()-1).getText();
-
+                .enterAddressAlias(alias)
+                .save()
+                .getLastAliasAddress();
 
         // Assert
         Assert.assertEquals(expectedAlias, alias, "Wrong address created, shown = "
@@ -67,7 +61,7 @@ public class AddressTest {
                 + " and expected = "
                 + alias);
     }
-//TODO
+
     @Test(retryAnalyzer = Retry.class)
     public void updateAddress() {
         // Arrange
@@ -78,7 +72,7 @@ public class AddressTest {
 
         // Act
         var hp = new HomePage(driver);
-        hp.openAuthentication()
+        var addPage = hp.openAuthentication()
                 .logIn(EMAIL, PWD)
                 .openAddressPage()
                 .updateAddress(addressIndex)
@@ -86,12 +80,9 @@ public class AddressTest {
                 .enterMobilePhone(mobile)
                 .enterSndAddress(sndAddress).save();
 
-        By addressSelector = By.cssSelector(".bloc_adresses div");
-        var addressList = driver.findElements(addressSelector);
-        var updatedAddress = addressList.get(addressIndex);
-        String updatedCompany = driver.findElement(By.cssSelector(".address_company")).getText();
-        String updatedMobile = driver.findElement(By.cssSelector(".address_phone_mobile")).getText();
-        String updatedSndAddress = driver.findElement(By.cssSelector(".address_address2")).getText();
+        String updatedCompany = addPage.getCompanyName(addressIndex);
+        String updatedMobile = addPage.getMobile(addressIndex);
+        String updatedSndAddress = addPage.getSndAddress(addressIndex);
 
         // Assert
         Assert.assertEquals(company, updatedCompany, "Wrong company update");
@@ -114,7 +105,7 @@ public class AddressTest {
         var hp = new HomePage(driver);
         String add = hp.openAuthentication()
                 .logIn(email, pwd)
-                .openAddressPage().getAddress(0);
+                .openAddressPage().getFullAddress(0);
 
         // Assert
         Assert.assertEquals(expectedCredential, add, "Not the same address: expected = "

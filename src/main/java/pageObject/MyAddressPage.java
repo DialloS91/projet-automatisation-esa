@@ -14,6 +14,10 @@ public class MyAddressPage {
     By firstAddressSelector = By.cssSelector(".bloc_adresses ul li .address_address1");
     By createAddressSelector = By.cssSelector("[title=\"Add an address\"]");
     By updateAddressSelector = By.cssSelector(".bloc_adresses ul [title=\"Update\"]");
+    By aliasSelector = By.cssSelector(".bloc_adresses div h3");
+    By companySelector = By.cssSelector(".bloc_adresses div .address_company");
+    By sndAddressSelector = By.cssSelector(".bloc_adresses div .address_address2");
+    By mobileSelector = By.cssSelector(".bloc_adresses div .address_phone_mobile");
 
     public MyAddressPage(WebDriver driver) {
         this.driver = driver;
@@ -32,7 +36,7 @@ public class MyAddressPage {
         return new YourAddressPage(driver);
     }
 
-    public String getAddress(int index) {
+    public String getFullAddress(int index) {
         var addresses = driver.findElements(AddressSelector).get(index);
         String result = "";
 
@@ -50,4 +54,21 @@ public class MyAddressPage {
         return result;
     }
 
+    //TODO make it generic
+    public String getLastAliasAddress() {
+        var addressList = driver.findElements(aliasSelector);
+        return addressList.get(addressList.size()-1).getText();
+    }
+
+    public String getCompanyName(int index) {
+        return driver.findElement(companySelector).getText();
+    }
+
+    public String getMobile(int index) {
+        return driver.findElement(mobileSelector).getText();
+    }
+
+    public String getSndAddress(int index) {
+        return driver.findElement(sndAddressSelector).getText();
+    }
 }
