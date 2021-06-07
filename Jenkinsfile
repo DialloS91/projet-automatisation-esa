@@ -2,7 +2,6 @@ pipeline {
     agent any
     parameters {
         string(name: 'option', defaultValue: '', description: 'option for gradle')  
-        string(name: 'testClass', defaultValue: '', description: 'Which Script should I launch')   
     }
 
     stages {
