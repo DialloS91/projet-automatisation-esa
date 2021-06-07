@@ -6,18 +6,20 @@ pipeline {
 
     stages {
         stage('Test') {
-            steps {
-                def userInput = input(
-                            id: 'userInput', message: 'inptu options and class to execute',
+            script {
+            def userInput = input(
+                            id: 'userInput', message: 'Enter path of test reports:?',
                             parameters: [
 
-                                    string(defaultValue: '--tests',
-                                            description: 'options',
-                                            name: 'Option'),
                                     string(defaultValue: 'None',
-                                            description: 'test script to execute',
-                                            name: 'testClass'),
+                                            description: 'Path of config file',
+                                            name: 'Config'),
+                                    string(defaultValue: 'None',
+                                            description: 'Test Info file',
+                                            name: 'Test'),
                             ])
+            }
+            steps {
                 bat "gradlew.bat clean test ${userInput.Option} ${userInput.testClass}"
             }
         }
