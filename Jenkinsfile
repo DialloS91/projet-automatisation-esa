@@ -1,26 +1,13 @@
 pipeline {
     agent any
     parameters {
-        string(name: 'testClass', defaultValue: '', description: 'Which Script should I launch')   
+        string(name: 'testClass', defaultValue: 'None', description: 'Which Script should I launch')   
     }
 
     stages {
         stage('Test') {
-            script {
-            def userInput = input(
-                            id: 'userInput', message: 'Enter path of test reports:?',
-                            parameters: [
-
-                                    string(defaultValue: 'None',
-                                            description: 'Path of config file',
-                                            name: 'Config'),
-                                    string(defaultValue: 'None',
-                                            description: 'Test Info file',
-                                            name: 'Test'),
-                            ])
-            }
             steps {
-                bat "gradlew.bat clean test ${userInput.Option} ${userInput.testClass}"
+                bat "gradlew.bat clean test --tests ${params.testClass}"
             }
         }
     }
