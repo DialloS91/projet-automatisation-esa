@@ -26,8 +26,6 @@ public class SearchProductTest extends Safe {
         driver.quit();
     }
 
-    //TODO Refactor the tests (drivers and selector should not be here)
-    //TODO
     @Test(retryAnalyzer = Retry.class)
     public void SearchArticleTest(){
         // Arrange
@@ -48,7 +46,6 @@ public class SearchProductTest extends Safe {
                 "] does not contain: [" + article +"]"));
     }
 
-    //TODO
     @Test(retryAnalyzer = Retry.class)
     public void searchArticleAutocomplete() {
         // Arrange
@@ -59,13 +56,12 @@ public class SearchProductTest extends Safe {
         Header header = new Header(driver);
         var suggest = header.partialSearch(dress);
         String expectedTitleProduct = suggest.getSuggestionTitle(firstChoice);
-
-        // Assert
-        Assert.assertTrue(suggest.isSuggestDropDownDisplayed());
-
         String productTitle = suggest
                 .openSuggestion(firstChoice)
                 .getProductTitle();
+
+        // Assert
+        Assert.assertTrue(suggest.isSuggestDropDownDisplayed());
         Assert.assertEquals(productTitle, expectedTitleProduct);
     }
 
